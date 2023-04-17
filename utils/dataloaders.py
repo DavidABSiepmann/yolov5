@@ -536,9 +536,14 @@ class LoadImagesAndLabels(Dataset):
                 if segment:
                     self.segments[i] = segment[j]
             if single_cls:  # single-class training, merge all classes into 0
+                # print(self.labels[i])
                 self.labels[i][:, 0] = 0
-                if segment:
-                    self.segments[i][:, 0] = 0
+                # if segment:
+                #     print("------------------")
+                #     print(self.segments[i], self.segments[i][0].shape)
+                #     print("------------------")
+                #     print(self.segments[i][0])
+                #     self.segments[i][:, 0] = 0
 
         # Rectangular Training
         if self.rect:

@@ -80,7 +80,7 @@ def train(opt, device):
             if str(data) == 'imagenet':
                 subprocess.run(f"bash {ROOT / 'data/scripts/get_imagenet.sh'}", shell=True, check=True)
             else:
-                url = f'https://github.com/ultralytics/yolov5/releases/download/v1.0/{data}.zip'
+                url = f'https://github.com/ultralytics/yolov5/releases/download/v7.0/{data}.zip'
                 download(url, dir=data_dir.parent)
             s = f"Dataset download success ✅ ({time.time() - t:.1f}s), saved to {colorstr('bold', data_dir)}\n"
             LOGGER.info(s)

@@ -172,7 +172,11 @@ def run(
                 # Write results
                 for j, (*xyxy, conf, cls) in enumerate(reversed(det[:, :6])):
                     if save_txt:  # Write to file
-                        segj = segments[j].reshape(-1)  # (n,2) to (n*2)
+                        epsilon = 0.005*cv2.arcLength(segments[j],True)
+                        segmentsj_reduced = cv2.approxPolyDP(segments[j],epsilon,True)
+                        segmentsj_reduced = segments[j] if segmentsj_reduced is None else segmentsj_reduced
+                        segmentsj_reduced = segments[j] if len(segmentsj_reduced) < 3 else segmentsj_reduced
+                        segj = segmentsj_reduced.reshape(-1)  # (n,2) to (n*2)
                         line = (cls, *segj, conf) if save_conf else (cls, *segj)  # label format
                         with open(f'{txt_path}.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')

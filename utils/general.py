@@ -1120,7 +1120,10 @@ imshow_ = cv2.imshow  # copy to avoid recursion errors
 
 
 def imread(path, flags=cv2.IMREAD_COLOR):
-    return cv2.imdecode(np.fromfile(path, np.uint8), flags)
+    try:
+        return cv2.imdecode(np.fromfile(path, np.uint8), flags)
+    except Exception:
+        return None
 
 
 def imwrite(path, im):
